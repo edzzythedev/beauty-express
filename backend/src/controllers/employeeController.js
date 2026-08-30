@@ -94,8 +94,23 @@ const loginEmployee = catchAsync(async (req, res) => {
     },
   });
 });
+// GET /api/employees/me
+// Protected route — returns the profile of whichever employee is logged in,
+// identified via the JWT that auth middleware already verified.
+const getMyProfile = catchAsync(async (req, res) => {
+  const result = await pool.query(
+    'SELECT id, full_name, phone_number, status, created_at FROM employees WHERE id = $1',
+    [req.user.id]
+  );
 
-module.exports = { registerEmployee, loginEmployee };
+  if (result.rows.length === 0) {
+    throw new AppError('Employee not found.', 404, 'EMPLOYEE_NOT_FOUND');
+  }
 
+  res.status(200).json({
+    success: true,
+    employee: result.rows[0],
+  });
+});
 
-
+module.exports = { registerEmployee, loginEmployee, getMyProfile };

@@ -180,6 +180,36 @@ Logs in an employee and returns a JWT token, valid for 12 hours.
 
 Include the token on future requests as: `Authorization: Bearer <token>`
 
+### GET /employees/me
+
+**Protected route** — requires a valid JWT.
+
+**Headers:**
+
+Authorization: Bearer <token>
+
+
+**Success response 200 OK:**
+
+{
+"success": true,
+"employee": {
+"id": "uuid",
+"full_name": "Grace Wanjiru",
+"phone_number": "0722334455",
+"status": "offline",
+"created_at": "2026-08-30T03:40:39.015Z"
+}
+}
+
+
+**Error responses:**
+
+| Status | Error code | Cause |
+|---|---|---|
+| 401 | NO_TOKEN | No Authorization header provided |
+| 401 | TOKEN_EXPIRED | Token has expired (tokens last 12 hours) |
+| 401 | INVALID_TOKEN | Token is malformed or was signed with a different secret |
 **Error responses:**
 
 | Status | Error code | Cause |

@@ -111,11 +111,16 @@ Every error follows this exact shape:
 Registers a new employee account.
 
 **Request body:**
+**Request body:**
 
 {
 "full_name": "Grace Wanjiru",
 "phone_number": "0722334455",
-"password": "securepass123"
+"password": "securepass123",
+"email": "grace@beautyexpress.co.ke",
+"id_number": "34567890",
+"role_title": "Nail Technician",
+"bio": "Specializes in gel extensions and nail art"
 }
 
 
@@ -124,7 +129,24 @@ Registers a new employee account.
 | full_name | string | yes | Minimum 2 characters |
 | phone_number | string | yes | Must be unique |
 | password | string | yes | Minimum 6 characters, stored as a bcrypt hash |
+| email | string | yes | Must be unique and valid format |
+| id_number | string | yes | National ID, 7-8 digits, must be unique |
+| role_title | string | yes | e.g. "Nail Technician", "Hair Stylist" |
+| bio | string | no | Optional short description shown to customers |
 
+**Error responses:**
+
+| Status | Error code | Cause |
+|---|---|---|
+| 400 | INVALID_NAME | full_name missing or under 2 characters |
+| 400 | MISSING_PHONE | phone_number missing |
+| 400 | WEAK_PASSWORD | password under 6 characters |
+| 400 | INVALID_EMAIL | email missing or badly formatted |
+| 400 | INVALID_ID_NUMBER | id_number missing or not 7-8 digits |
+| 400 | INVALID_ROLE_TITLE | role_title missing or under 2 characters |
+| 409 | DUPLICATE_PHONE | Phone number already registered |
+| 409 | DUPLICATE_EMAIL | Email already registered |
+| 409 | DUPLICATE_ID_NUMBER | ID number already registered |
 **Success response 201 Created:**
 
 {

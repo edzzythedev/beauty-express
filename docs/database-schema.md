@@ -24,11 +24,14 @@ CREATE TABLE admins (
 ## 2. `employees`
 The staff who tend to customers.
 
-```sql
-CREATE TABLE employees (
+```CREATE TABLE employees (
     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     full_name       VARCHAR(100) NOT NULL,
     phone_number    VARCHAR(20) UNIQUE NOT NULL,
+    email           VARCHAR(150) UNIQUE,
+    id_number       VARCHAR(20) UNIQUE,
+    role_title      VARCHAR(100),
+    bio             TEXT,
     photo_url       TEXT,
     password_hash   TEXT NOT NULL,
     status          VARCHAR(20) NOT NULL DEFAULT 'offline',

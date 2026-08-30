@@ -45,3 +45,4 @@ See `backend/README.md` and `frontend/README.md` for setup instructions specific
 ## Documentation
 
 - [`docs/database-schema.md`](./docs/database-schema.md) — full database schema and design reasoning
+- [`docs/API.md`](./docs/API.md) — API endpoint reference, request/response formats, and error codes

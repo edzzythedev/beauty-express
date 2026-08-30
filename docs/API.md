@@ -104,6 +104,89 @@ Every error follows this exact shape:
 | 409 | Conflict |
 | 500 | Internal server error |
 
+## Employees
+
+### POST /employees/register
+
+Registers a new employee account.
+
+**Request body:**
+
+{
+"full_name": "Grace Wanjiru",
+"phone_number": "0722334455",
+"password": "securepass123"
+}
+
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| full_name | string | yes | Minimum 2 characters |
+| phone_number | string | yes | Must be unique |
+| password | string | yes | Minimum 6 characters, stored as a bcrypt hash |
+
+**Success response 201 Created:**
+
+{
+"success": true,
+"message": "Employee registered successfully.",
+"employee": {
+"id": "uuid",
+"full_name": "Grace Wanjiru",
+"phone_number": "0722334455",
+"status": "offline",
+"created_at": "2026-08-30T03:40:39.015Z"
+}
+}
+
+
+**Error responses:**
+
+| Status | Error code | Cause |
+|---|---|---|
+| 400 | INVALID_NAME | full_name missing or under 2 characters |
+| 400 | MISSING_PHONE | phone_number missing |
+| 400 | WEAK_PASSWORD | password under 6 characters |
+| 409 | DUPLICATE_PHONE | Phone number already registered |
+
+---
+
+### POST /employees/login
+
+Logs in an employee and returns a JWT token, valid for 12 hours.
+
+**Request body:**
+
+{
+"phone_number": "0722334455",
+"password": "securepass123"
+}
+
+
+**Success response 200 OK:**
+
+{
+"success": true,
+"message": "Login successful.",
+"token": "eyJhbGciOi...",
+"employee": {
+"id": "uuid",
+"full_name": "Grace Wanjiru",
+"phone_number": "0722334455",
+"status": "offline"
+}
+}
+
+
+Include the token on future requests as: `Authorization: Bearer <token>`
+
+**Error responses:**
+
+| Status | Error code | Cause |
+|---|---|---|
+| 400 | MISSING_CREDENTIALS | phone_number or password missing |
+| 401 | INVALID_CREDENTIALS | Wrong phone number or password (intentionally vague for security) |
+| 403 | ACCOUNT_DEACTIVATED | Employee account has been deactivated by admin |
 ---
 
 ## Changelog

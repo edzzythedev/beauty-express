@@ -19,6 +19,7 @@ app.get('/api/health', (req, res) => {
 
 // Future routes will be mounted here, e.g.:
 app.use('/api/customers', require('./routes/customerRoutes'));
+app.use('/api/employees', require('./routes/employeeRoutes'));
 // app.use('/api/bookings', require('./routes/bookings'));
 // app.use('/api/employees', require('./routes/employees'));
 // app.use('/api/customers', require('./routes/customers'));

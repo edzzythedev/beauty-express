@@ -22,6 +22,8 @@ app.use('/api/customers', require('./routes/customerRoutes'));
 // app.use('/api/bookings', require('./routes/bookings'));
 // app.use('/api/employees', require('./routes/employees'));
 // app.use('/api/customers', require('./routes/customers'));
+const errorHandler = require('./middleware/errorHandler');
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Beauty Express backend running on http://localhost:${PORT}`);

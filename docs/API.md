@@ -108,6 +108,10 @@ Every error follows this exact shape:
 
 ### POST /employees/register
 
+### POST /employees/register
+
+**Protected route** — requires a valid admin JWT (`Authorization: Bearer <admin_token>`).
+
 Registers a new employee account.
 
 **Request body:**

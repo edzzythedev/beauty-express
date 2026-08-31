@@ -1,6 +1,6 @@
 # Beauty Express — Salon Queue & Booking System
 
-A queue and appointment system built for **Beauty Express**, solving the classic salon problem: customers showing up to a packed salon with no idea how long they'll wait.
+A queue and appointment system built for **Beauty Express**, a nail spa, solving the classic problem: customers showing up to a packed nail spa with no idea how long they'll wait.
 
 ## What it does
 
